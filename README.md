@@ -213,25 +213,6 @@ To test the application locally with a database backend, you must create a Fireb
 
 ---
 
-## How to Build the Release APK for Deployment
-
-To compile the Android APK file to share online or install on a physical phone:
-
-1. Open a terminal inside the project directory:
-   ```bash
-   cd zana-app
-   ```
-
-2. Run the build command:
-   ```bash
-   flutter build apk --release
-   ```
-
-3. After compilation completes, find your compiled APK file at:
-   `zana_app/build/app/outputs/flutter-apk/app-release.apk`
-
----
-
 ## Troubleshooting Guide & Common Setup Issues
 
 ### Issue 1: `google-services.json` Missing Error
@@ -308,25 +289,25 @@ To compile the Android APK file to share online or install on a physical phone:
 
 ---
 
-## Testing Account Credentials
+## Account Registration & Testing Guide
 
-When testing locally without creating new accounts, the app provides built-in fallback models and mock handling:
+Once the application is connected to Cloud Firestore, users create new accounts directly within the app during testing.
 
-### Student Account Demo
-- Email: `student@zana.com`
-- Password: `password123`
-- Actions: Browse opportunity feed, apply with custom cover letters, track status, view notifications.
+### Student Account Registration
+- Navigate to the Sign Up screen and select "Student".
+- Fill in your full name, email (e.g. `student@example.com`), and password.
+- Complete the onboarding steps to set up your profile details (Field of Study, Country, Education Level).
 
-### Founder Account Demo
-- Email: `founder@zana.com`
-- Password: `password123`
-- Actions: Dashboard metrics, post opportunities, view candidate profiles, send feedback, close or reopen listings.
+### Startup / Founder Account Registration
+- Navigate to the Sign Up screen and select "Startup Founder".
+- Register using a business email address (e.g. `zana@info.tech` or `founder@company.io`) and business name.
+- Note: Business email format is validated during startup registration. Email link verification is not required for testing, so any valid business email format (e.g. `info@company.tech`) can be used for testing.
 
 ---
 
 ## Useful Command Quick Reference
 
-- Run App on Android Emulator:
+- Run App on Android Device / Emulator:
   ```bash
   flutter run -d android
   ```
@@ -335,14 +316,6 @@ When testing locally without creating new accounts, the app provides built-in fa
 - Run Static Code Analysis:
   ```bash
   flutter analyze
-  ```
-- Build Production Release APK:
-  ```bash
-  flutter build apk --release
-  ```
-- Build Android App Bundle (AAB for Google Play):
-  ```bash
-  flutter build appbundle --release
   ```
 
 ---
