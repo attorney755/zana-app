@@ -8,7 +8,10 @@ import '../../widgets/startup_bottom_nav_bar.dart';
 class EditPostScreen extends StatefulWidget {
   final String opportunityId;
 
-  const EditPostScreen({super.key, required this.opportunityId});
+  const EditPostScreen({
+    super.key,
+    required this.opportunityId,
+  });
 
   @override
   State<EditPostScreen> createState() => _EditPostScreenState();
@@ -71,9 +74,7 @@ class _EditPostScreenState extends State<EditPostScreen> {
   }
 
   Future<void> _loadExistingData() async {
-    final opp = await _firestoreService.getOpportunityById(
-      widget.opportunityId,
-    );
+    final opp = await _firestoreService.getOpportunityById(widget.opportunityId);
     if (opp != null && mounted) {
       setState(() {
         _existingOpp = opp;
@@ -81,14 +82,10 @@ class _EditPostScreenState extends State<EditPostScreen> {
         _descriptionController.text = opp.description;
         _locationController.text = opp.location;
         _hoursController.text = opp.hoursPerWeek;
-        _category = _categories.contains(opp.category)
-            ? opp.category
-            : 'Internship';
+        _category = _categories.contains(opp.category) ? opp.category : 'Internship';
         _workType = opp.workType.isNotEmpty ? opp.workType : 'Remote';
         _commitment = opp.commitment.isNotEmpty ? opp.commitment : 'Part Time';
-        _selectedEligibleCountries = opp.eligibleCountries.isNotEmpty
-            ? List<String>.from(opp.eligibleCountries)
-            : ['Rwanda'];
+        _selectedEligibleCountries = opp.eligibleCountries.isNotEmpty ? List<String>.from(opp.eligibleCountries) : ['Rwanda'];
         _isLoading = false;
       });
     } else if (mounted) {
@@ -119,9 +116,9 @@ class _EditPostScreenState extends State<EditPostScreen> {
     }
 
     if (_category.isEmpty) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('Please select a category')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please select a category')),
+      );
       return;
     }
 
@@ -134,9 +131,7 @@ class _EditPostScreenState extends State<EditPostScreen> {
 
     if (_selectedEligibleCountries.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please select at least one eligible country'),
-        ),
+        const SnackBar(content: Text('Please select at least one eligible country')),
       );
       return;
     }
@@ -155,11 +150,9 @@ class _EditPostScreenState extends State<EditPostScreen> {
         category: _category,
         title: title,
         provider: _existingOpp!.provider,
-        subtitle:
-            '$_commitment · $_workType · ${_locationController.text.trim().isNotEmpty ? _locationController.text.trim() : 'Kigali, Rwanda'}',
+        subtitle: '$_commitment · $_workType · ${_locationController.text.trim().isNotEmpty ? _locationController.text.trim() : 'Kigali, Rwanda'}',
         description: description,
-        eligibility:
-            'Open to candidates from ${_selectedEligibleCountries.join(', ')}',
+        eligibility: 'Open to candidates from ${_selectedEligibleCountries.join(', ')}',
         eligibleCountries: _selectedEligibleCountries,
         deadline: _existingOpp!.deadline,
         applicationUrl: _existingOpp!.applicationUrl,
@@ -168,12 +161,8 @@ class _EditPostScreenState extends State<EditPostScreen> {
         isActive: _existingOpp!.isActive,
         workType: _workType,
         commitment: _commitment,
-        location: _locationController.text.trim().isNotEmpty
-            ? _locationController.text.trim()
-            : 'Kigali, Rwanda',
-        hoursPerWeek: _hoursController.text.trim().isNotEmpty
-            ? _hoursController.text.trim()
-            : '20 hrs/week',
+        location: _locationController.text.trim().isNotEmpty ? _locationController.text.trim() : 'Kigali, Rwanda',
+        hoursPerWeek: _hoursController.text.trim().isNotEmpty ? _hoursController.text.trim() : '20 hrs/week',
         skills: _existingOpp!.skills,
         viewsCount: _existingOpp!.viewsCount,
         applicantsCount: _existingOpp!.applicantsCount,
@@ -220,11 +209,7 @@ class _EditPostScreenState extends State<EditPostScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios_new_rounded,
-            color: textColor,
-            size: 20,
-          ),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: textColor, size: 20),
           onPressed: () {
             if (Navigator.canPop(context)) {
               Navigator.pop(context);
@@ -240,9 +225,7 @@ class _EditPostScreenState extends State<EditPostScreen> {
         centerTitle: true,
       ),
       body: _isLoading
-          ? const Center(
-              child: CircularProgressIndicator(color: Color(0xFF0F4C81)),
-            )
+          ? const Center(child: CircularProgressIndicator(color: Color(0xFF0F4C81)))
           : SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -252,22 +235,13 @@ class _EditPostScreenState extends State<EditPostScreen> {
                   Card(
                     color: cardBg,
                     elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Opportunity Title',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: textColor,
-                            ),
-                          ),
+                          const Text('Opportunity Title', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: textColor)),
                           const SizedBox(height: 8),
                           TextField(
                             controller: _titleController,
@@ -277,14 +251,7 @@ class _EditPostScreenState extends State<EditPostScreen> {
                             ),
                           ),
                           const SizedBox(height: 16),
-                          const Text(
-                            'Category',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: textColor,
-                            ),
-                          ),
+                          const Text('Category', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: textColor)),
                           const SizedBox(height: 8),
                           Wrap(
                             spacing: 8,
@@ -296,18 +263,12 @@ class _EditPostScreenState extends State<EditPostScreen> {
                                 selectedColor: const Color(0xFFEEF2FF),
                                 backgroundColor: const Color(0xFFF8FAFC),
                                 side: BorderSide(
-                                  color: selected
-                                      ? const Color(0xFF0F4C81)
-                                      : const Color(0xFFCBD5E1),
+                                  color: selected ? const Color(0xFF0F4C81) : const Color(0xFFCBD5E1),
                                   width: selected ? 1.5 : 1,
                                 ),
                                 labelStyle: TextStyle(
-                                  color: selected
-                                      ? const Color(0xFF0F4C81)
-                                      : textColor,
-                                  fontWeight: selected
-                                      ? FontWeight.bold
-                                      : FontWeight.w500,
+                                  color: selected ? const Color(0xFF0F4C81) : textColor,
+                                  fontWeight: selected ? FontWeight.bold : FontWeight.w500,
                                 ),
                                 onSelected: (val) {
                                   if (val) setState(() => _category = c);
@@ -325,22 +286,13 @@ class _EditPostScreenState extends State<EditPostScreen> {
                   Card(
                     color: cardBg,
                     elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Description',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: textColor,
-                            ),
-                          ),
+                          const Text('Description', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: textColor)),
                           const SizedBox(height: 8),
                           TextField(
                             controller: _descriptionController,
@@ -351,22 +303,14 @@ class _EditPostScreenState extends State<EditPostScreen> {
                             ),
                           ),
                           const SizedBox(height: 16),
-                          const Text(
-                            'Eligible Countries',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: textColor,
-                            ),
-                          ),
+                          const Text('Eligible Countries', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: textColor)),
                           const SizedBox(height: 8),
                           Wrap(
                             spacing: 8,
                             runSpacing: 8,
                             children: _availableCountries.map((country) {
                               final flag = _countryFlags[country] ?? '';
-                              final selected = _selectedEligibleCountries
-                                  .contains(country);
+                              final selected = _selectedEligibleCountries.contains(country);
                               return FilterChip(
                                 label: Text('$flag  $country'),
                                 selected: selected,
@@ -374,27 +318,19 @@ class _EditPostScreenState extends State<EditPostScreen> {
                                 backgroundColor: const Color(0xFFF8FAFC),
                                 checkmarkColor: const Color(0xFF0F4C81),
                                 side: BorderSide(
-                                  color: selected
-                                      ? const Color(0xFF0F4C81)
-                                      : const Color(0xFFCBD5E1),
+                                  color: selected ? const Color(0xFF0F4C81) : const Color(0xFFCBD5E1),
                                   width: selected ? 1.5 : 1,
                                 ),
                                 labelStyle: TextStyle(
-                                  color: selected
-                                      ? const Color(0xFF0F4C81)
-                                      : textColor,
-                                  fontWeight: selected
-                                      ? FontWeight.bold
-                                      : FontWeight.w500,
+                                  color: selected ? const Color(0xFF0F4C81) : textColor,
+                                  fontWeight: selected ? FontWeight.bold : FontWeight.w500,
                                 ),
                                 onSelected: (val) {
                                   setState(() {
                                     if (val) {
                                       _selectedEligibleCountries.add(country);
                                     } else {
-                                      _selectedEligibleCountries.remove(
-                                        country,
-                                      );
+                                      _selectedEligibleCountries.remove(country);
                                     }
                                   });
                                 },
@@ -411,22 +347,13 @@ class _EditPostScreenState extends State<EditPostScreen> {
                   Card(
                     color: cardBg,
                     elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Work Type',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: textColor,
-                            ),
-                          ),
+                          const Text('Work Type', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: textColor)),
                           const SizedBox(height: 8),
                           Wrap(
                             spacing: 8,
@@ -438,18 +365,12 @@ class _EditPostScreenState extends State<EditPostScreen> {
                                 selectedColor: const Color(0xFFEEF2FF),
                                 backgroundColor: const Color(0xFFF8FAFC),
                                 side: BorderSide(
-                                  color: selected
-                                      ? const Color(0xFF0F4C81)
-                                      : const Color(0xFFCBD5E1),
+                                  color: selected ? const Color(0xFF0F4C81) : const Color(0xFFCBD5E1),
                                   width: selected ? 1.5 : 1,
                                 ),
                                 labelStyle: TextStyle(
-                                  color: selected
-                                      ? const Color(0xFF0F4C81)
-                                      : textColor,
-                                  fontWeight: selected
-                                      ? FontWeight.bold
-                                      : FontWeight.w500,
+                                  color: selected ? const Color(0xFF0F4C81) : textColor,
+                                  fontWeight: selected ? FontWeight.bold : FontWeight.w500,
                                 ),
                                 onSelected: (val) {
                                   if (val) setState(() => _workType = wt);
@@ -458,14 +379,7 @@ class _EditPostScreenState extends State<EditPostScreen> {
                             }).toList(),
                           ),
                           const SizedBox(height: 16),
-                          const Text(
-                            'Commitment',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: textColor,
-                            ),
-                          ),
+                          const Text('Commitment', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: textColor)),
                           const SizedBox(height: 8),
                           Wrap(
                             spacing: 8,
@@ -477,18 +391,12 @@ class _EditPostScreenState extends State<EditPostScreen> {
                                 selectedColor: const Color(0xFFEEF2FF),
                                 backgroundColor: const Color(0xFFF8FAFC),
                                 side: BorderSide(
-                                  color: selected
-                                      ? const Color(0xFF0F4C81)
-                                      : const Color(0xFFCBD5E1),
+                                  color: selected ? const Color(0xFF0F4C81) : const Color(0xFFCBD5E1),
                                   width: selected ? 1.5 : 1,
                                 ),
                                 labelStyle: TextStyle(
-                                  color: selected
-                                      ? const Color(0xFF0F4C81)
-                                      : textColor,
-                                  fontWeight: selected
-                                      ? FontWeight.bold
-                                      : FontWeight.w500,
+                                  color: selected ? const Color(0xFF0F4C81) : textColor,
+                                  fontWeight: selected ? FontWeight.bold : FontWeight.w500,
                                 ),
                                 onSelected: (val) {
                                   if (val) setState(() => _commitment = cm);
@@ -497,14 +405,7 @@ class _EditPostScreenState extends State<EditPostScreen> {
                             }).toList(),
                           ),
                           const SizedBox(height: 16),
-                          const Text(
-                            'Location',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: textColor,
-                            ),
-                          ),
+                          const Text('Location', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: textColor)),
                           const SizedBox(height: 8),
                           TextField(
                             controller: _locationController,
@@ -514,14 +415,7 @@ class _EditPostScreenState extends State<EditPostScreen> {
                             ),
                           ),
                           const SizedBox(height: 16),
-                          const Text(
-                            'Hours per week',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: textColor,
-                            ),
-                          ),
+                          const Text('Hours per week', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: textColor)),
                           const SizedBox(height: 8),
                           TextField(
                             controller: _hoursController,
@@ -545,28 +439,13 @@ class _EditPostScreenState extends State<EditPostScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF0F4C81),
                         foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                         elevation: 0,
                       ),
                       child: _isSubmitting
-                          ? const SizedBox(
-                              width: 24,
-                              height: 24,
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                                strokeWidth: 2.5,
-                              ),
-                            )
-                          : const Text(
-                              'Update Opportunity',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                    ),
+                          ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5))
+                          : const Text('Update Opportunity', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      ),
                   ),
                   const SizedBox(height: 40),
                 ],

@@ -45,9 +45,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
         _fullNameController.text = profile.fullName;
         _companyNameController.text = profile.companyName ?? '';
         _emailController.text = profile.email;
-        _regionController.text = profile.country?.isNotEmpty == true
-            ? profile.country!
-            : 'Rwanda / East Africa';
+        _regionController.text = profile.country?.isNotEmpty == true ? profile.country! : 'Rwanda / East Africa';
         _isLoading = false;
       });
     }
@@ -108,15 +106,11 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
       valueListenable: appThemeNotifier,
       builder: (context, themeMode, child) {
         final isDark = themeMode == ThemeMode.dark;
-        final bgClr = isDark
-            ? const Color(0xFF121212)
-            : const Color(0xFFF3F0FF); // Soft Lilac backdrop
+        final bgClr = isDark ? const Color(0xFF121212) : const Color(0xFFF3F0FF); // Soft Lilac backdrop
         final cardBg = isDark ? const Color(0xFF1E1E1E) : Colors.white;
         final textColor = isDark ? Colors.white : const Color(0xFF1E1B4B);
         final subtextColor = isDark ? Colors.white70 : const Color(0xFF6B7280);
-        final inputBg = isDark
-            ? const Color(0xFF2A2A2A)
-            : const Color(0xFFF8FAFC);
+        final inputBg = isDark ? const Color(0xFF2A2A2A) : const Color(0xFFF8FAFC);
         final borderClr = isDark ? Colors.white24 : const Color(0xFFCBD5E1);
 
         return Scaffold(
@@ -125,11 +119,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
             backgroundColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
             elevation: 0,
             leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: isDark ? Colors.white : const Color(0xFF1E1B4B),
-                size: 22,
-              ),
+              icon: Icon(Icons.arrow_back_ios_new_rounded, color: isDark ? Colors.white : const Color(0xFF1E1B4B), size: 22),
               onPressed: () {
                 if (Navigator.canPop(context)) {
                   Navigator.pop(context);
@@ -140,17 +130,12 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
             ),
             title: Text(
               'Account Information',
-              style: TextStyle(
-                color: isDark ? Colors.white : const Color(0xFF1E1B4B),
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(color: isDark ? Colors.white : const Color(0xFF1E1B4B), fontWeight: FontWeight.bold),
             ),
             centerTitle: true,
           ),
           body: _isLoading
-              ? const Center(
-                  child: CircularProgressIndicator(color: Color(0xFF0F4C81)),
-                )
+              ? const Center(child: CircularProgressIndicator(color: Color(0xFF0F4C81)))
               : Form(
                   key: _formKey,
                   child: ListView(
@@ -162,9 +147,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                         decoration: BoxDecoration(
                           color: cardBg,
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: borderClr.withValues(alpha: 0.5),
-                          ),
+                          border: Border.all(color: borderClr.withValues(alpha: 0.5)),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withValues(alpha: 0.04),
@@ -179,130 +162,58 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Account Type',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: subtextColor,
-                                  ),
-                                ),
+                                Text('Account Type', style: TextStyle(fontSize: 12, color: subtextColor)),
                                 const SizedBox(height: 4),
-                                const Text(
-                                  'Startup Founder',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF0F4C81),
-                                  ),
-                                ),
+                                const Text('Startup Founder', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF0F4C81))),
                               ],
                             ),
-                            const Icon(
-                              Icons.verified_user_rounded,
-                              color: Color(0xFF10B981),
-                              size: 28,
-                            ),
+                            const Icon(Icons.verified_user_rounded, color: Color(0xFF10B981), size: 28),
                           ],
                         ),
                       ),
                       const SizedBox(height: 24),
 
                       // Form Header
-                      Text(
-                        'Edit Account Details',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: textColor,
-                        ),
-                      ),
+                      Text('Edit Account Details', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: textColor)),
                       const SizedBox(height: 14),
 
                       // Full Name
-                      Text(
-                        'Full Name',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: textColor,
-                          fontSize: 14,
-                        ),
-                      ),
+                      Text('Full Name', style: TextStyle(fontWeight: FontWeight.bold, color: textColor, fontSize: 14)),
                       const SizedBox(height: 8),
                       TextFormField(
                         controller: _fullNameController,
-                        validator: (val) => val == null || val.trim().isEmpty
-                            ? 'Please enter full name'
-                            : null,
+                        validator: (val) => val == null || val.trim().isEmpty ? 'Please enter full name' : null,
                         decoration: _inputDeco('Full Name', inputBg, borderClr),
                       ),
                       const SizedBox(height: 18),
 
                       // Legal Business Name
-                      Text(
-                        'Legal Business Name',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: textColor,
-                          fontSize: 14,
-                        ),
-                      ),
+                      Text('Legal Business Name', style: TextStyle(fontWeight: FontWeight.bold, color: textColor, fontSize: 14)),
                       const SizedBox(height: 8),
                       TextFormField(
                         controller: _companyNameController,
-                        validator: (val) => val == null || val.trim().isEmpty
-                            ? 'Please enter business name'
-                            : null,
-                        decoration: _inputDeco(
-                          'Legal Business Name',
-                          inputBg,
-                          borderClr,
-                        ),
+                        validator: (val) => val == null || val.trim().isEmpty ? 'Please enter business name' : null,
+                        decoration: _inputDeco('Legal Business Name', inputBg, borderClr),
                       ),
                       const SizedBox(height: 18),
 
                       // Business Email (Disabled / Read-only)
-                      Text(
-                        'Business Email',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: textColor,
-                          fontSize: 14,
-                        ),
-                      ),
+                      Text('Business Email', style: TextStyle(fontWeight: FontWeight.bold, color: textColor, fontSize: 14)),
                       const SizedBox(height: 8),
                       TextFormField(
                         controller: _emailController,
                         enabled: false,
-                        decoration: _inputDeco(
-                          'Business Email',
-                          isDark
-                              ? const Color(0xFF1E1E1E)
-                              : const Color(0xFFE2E8F0),
-                          borderClr,
-                        ),
+                        decoration: _inputDeco('Business Email', isDark ? const Color(0xFF1E1E1E) : const Color(0xFFE2E8F0), borderClr),
                       ),
                       const SizedBox(height: 18),
 
                       // Account Region
-                      Text(
-                        'Account Region',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: textColor,
-                          fontSize: 14,
-                        ),
-                      ),
+                      Text('Account Region', style: TextStyle(fontWeight: FontWeight.bold, color: textColor, fontSize: 14)),
                       const SizedBox(height: 8),
                       TextFormField(
                         controller: _regionController,
-                        validator: (val) => val == null || val.trim().isEmpty
-                            ? 'Please enter region'
-                            : null,
-                        decoration: _inputDeco(
-                          'e.g. Rwanda / East Africa',
-                          inputBg,
-                          borderClr,
-                        ),
+                        validator: (val) => val == null || val.trim().isEmpty ? 'Please enter region' : null,
+                        decoration: _inputDeco('e.g. Rwanda / East Africa', inputBg, borderClr),
                       ),
                       const SizedBox(height: 32),
 
@@ -311,25 +222,12 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                         child: ElevatedButton.icon(
                           onPressed: _isSaving ? null : _saveAccountInfo,
                           icon: const Icon(Icons.check_rounded, size: 18),
-                          label: const Text(
-                            'Save Changes',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                            ),
-                          ),
+                          label: const Text('Save Changes', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(
-                              0xFF0F4C81,
-                            ), // Cool Teal Blue Accent
+                            backgroundColor: const Color(0xFF0F4C81), // Cool Teal Blue Accent
                             foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 36,
-                              vertical: 14,
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 14),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                             elevation: 0,
                           ),
                         ),
@@ -348,18 +246,9 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
       filled: true,
       fillColor: fillClr,
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: borderClr),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: borderClr),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: const BorderSide(color: Color(0xFF0F4C81), width: 1.8),
-      ),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: borderClr)),
+      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: borderClr)),
+      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: const BorderSide(color: Color(0xFF0F4C81), width: 1.8)),
     );
   }
 }

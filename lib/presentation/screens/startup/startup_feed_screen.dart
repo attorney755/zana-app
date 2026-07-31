@@ -13,7 +13,10 @@ import '../../widgets/startup_bottom_nav_bar.dart';
 class StartupFeedScreen extends StatefulWidget {
   final ValueChanged<int>? onNavTap;
 
-  const StartupFeedScreen({super.key, this.onNavTap});
+  const StartupFeedScreen({
+    super.key,
+    this.onNavTap,
+  });
 
   @override
   State<StartupFeedScreen> createState() => _StartupFeedScreenState();
@@ -64,46 +67,30 @@ class _StartupFeedScreenState extends State<StartupFeedScreen> {
           valueListenable: appThemeNotifier,
           builder: (context, themeMode, child) {
             final isDark = themeMode == ThemeMode.dark;
-            final bgClr = isDark
-                ? const Color(0xFF121212)
-                : const Color(0xFFF3F0FF);
+            final bgClr = isDark ? const Color(0xFF121212) : const Color(0xFFF3F0FF);
             final cardBg = isDark ? const Color(0xFF1E1E1E) : Colors.white;
             final textColor = isDark ? Colors.white : const Color(0xFF1E1B4B);
-            final subtextColor = isDark
-                ? Colors.white70
-                : const Color(0xFF6B7280);
+            final subtextColor = isDark ? Colors.white70 : const Color(0xFF6B7280);
 
             final startupName = _founder?.companyName?.isNotEmpty == true
                 ? _founder!.companyName!
                 : (_founder?.fullName.isNotEmpty == true
-                      ? _founder!.fullName
-                      : (FirebaseAuth.instance.currentUser?.displayName ??
-                            'Startup Founder'));
+                    ? _founder!.fullName
+                    : (FirebaseAuth.instance.currentUser?.displayName ?? 'Startup Founder'));
 
             final initials = _founder?.initials ?? 'ZT';
 
             return Scaffold(
               backgroundColor: bgClr,
               body: _isLoading
-                  ? const Center(
-                      child: CircularProgressIndicator(
-                        color: Color(0xFF3730A3),
-                      ),
-                    )
+                  ? const Center(child: CircularProgressIndicator(color: Color(0xFF3730A3)))
                   : Column(
                       children: [
                         // Soft Lilac / White Clean Top Header Area
                         Container(
                           width: double.infinity,
-                          color: isDark
-                              ? const Color(0xFF1E1E1E)
-                              : Colors.white,
-                          padding: EdgeInsets.fromLTRB(
-                            20,
-                            MediaQuery.of(context).padding.top + 12,
-                            20,
-                            16,
-                          ),
+                          color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+                          padding: EdgeInsets.fromLTRB(20, MediaQuery.of(context).padding.top + 12, 20, 16),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -113,8 +100,7 @@ class _StartupFeedScreenState extends State<StartupFeedScreen> {
                                   // Greeting & Username on Top Left
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           '${AppTranslations.tr("hello")}, $startupName',
@@ -127,9 +113,7 @@ class _StartupFeedScreenState extends State<StartupFeedScreen> {
                                         ),
                                         const SizedBox(height: 2),
                                         Text(
-                                          AppTranslations.tr(
-                                            'welcome_back_dashboard',
-                                          ),
+                                          AppTranslations.tr('welcome_back_dashboard'),
                                           style: const TextStyle(
                                             fontSize: 12,
                                             color: Color(0xFF6B7280),
@@ -146,67 +130,37 @@ class _StartupFeedScreenState extends State<StartupFeedScreen> {
                                     children: [
                                       StreamBuilder<int>(
                                         stream: uid != null
-                                            ? _firestoreService
-                                                  .streamUnreadNotificationCount(
-                                                    uid,
-                                                  )
+                                            ? _firestoreService.streamUnreadNotificationCount(uid)
                                             : Stream.value(0),
                                         builder: (context, countSnap) {
-                                          final unreadCount =
-                                              countSnap.data ?? 0;
+                                          final unreadCount = countSnap.data ?? 0;
                                           return Container(
                                             decoration: BoxDecoration(
-                                              color: isDark
-                                                  ? const Color(0xFF2D2B55)
-                                                  : const Color(0xFF0F4C81),
+                                              color: isDark ? const Color(0xFF2D2B55) : const Color(0xFF0F4C81),
                                               shape: BoxShape.circle,
                                             ),
                                             child: Stack(
                                               clipBehavior: Clip.none,
                                               children: [
                                                 IconButton(
-                                                  icon: const Icon(
-                                                    Icons
-                                                        .notifications_none_rounded,
-                                                    color: Colors.white,
-                                                    size: 22,
-                                                  ),
-                                                  onPressed: () => context.push(
-                                                    '/notifications',
-                                                  ),
+                                                  icon: const Icon(Icons.notifications_none_rounded, color: Colors.white, size: 22),
+                                                  onPressed: () => context.push('/notifications'),
                                                 ),
                                                 if (unreadCount > 0)
                                                   Positioned(
                                                     right: 4,
                                                     top: 4,
                                                     child: Container(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                            4,
-                                                          ),
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                            color: Color(
-                                                              0xFFEF4444,
-                                                            ),
-                                                            shape:
-                                                                BoxShape.circle,
-                                                          ),
-                                                      constraints:
-                                                          const BoxConstraints(
-                                                            minWidth: 16,
-                                                            minHeight: 16,
-                                                          ),
+                                                      padding: const EdgeInsets.all(4),
+                                                      decoration: const BoxDecoration(
+                                                        color: Color(0xFFEF4444),
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
                                                       child: Text(
                                                         '$unreadCount',
-                                                        style: const TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                        textAlign:
-                                                            TextAlign.center,
+                                                        style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                                                        textAlign: TextAlign.center,
                                                       ),
                                                     ),
                                                   ),
@@ -226,9 +180,7 @@ class _StartupFeedScreenState extends State<StartupFeedScreen> {
                                         },
                                         child: CircleAvatar(
                                           radius: 22,
-                                          backgroundColor: const Color(
-                                            0xFFEEF2FF,
-                                          ),
+                                          backgroundColor: const Color(0xFFEEF2FF),
                                           child: Text(
                                             initials,
                                             style: const TextStyle(
@@ -284,16 +236,11 @@ class _StartupFeedScreenState extends State<StartupFeedScreen> {
                                       children: [
                                         // Card 1: Total Posts
                                         GestureDetector(
-                                          onTap: () =>
-                                              context.push('/startup/my-posts'),
+                                          onTap: () => context.push('/startup/my-posts'),
                                           child: _buildColorfulCard(
-                                            title: AppTranslations.tr(
-                                              'total_posts',
-                                            ),
+                                            title: AppTranslations.tr('total_posts'),
                                             count: '${_myPosts.length}',
-                                            subtitle: AppTranslations.tr(
-                                              'active_opportunities',
-                                            ),
+                                            subtitle: AppTranslations.tr('active_opportunities'),
                                             bgColor: const Color(0xFF0F4C81),
                                             textColor: Colors.white,
                                             icon: Icons.post_add_rounded,
@@ -303,17 +250,11 @@ class _StartupFeedScreenState extends State<StartupFeedScreen> {
 
                                         // Card 2: Total Applicants
                                         GestureDetector(
-                                          onTap: () => context.push(
-                                            '/startup/applicants',
-                                          ),
+                                          onTap: () => context.push('/startup/applicants'),
                                           child: _buildColorfulCard(
-                                            title: AppTranslations.tr(
-                                              'applicants',
-                                            ),
+                                            title: AppTranslations.tr('applicants'),
                                             count: '${_myApplicants.length}',
-                                            subtitle: AppTranslations.tr(
-                                              'received_submissions',
-                                            ),
+                                            subtitle: AppTranslations.tr('received_submissions'),
                                             bgColor: const Color(0xFF7F1D1D),
                                             textColor: Colors.white,
                                             icon: Icons.people_alt_rounded,
@@ -323,18 +264,10 @@ class _StartupFeedScreenState extends State<StartupFeedScreen> {
 
                                         // Card 3: Analytics
                                         GestureDetector(
-                                          onTap: () => context.push(
-                                            '/startup/analytics',
-                                          ),
+                                          onTap: () => context.push('/startup/analytics'),
                                           child: _buildColorfulCard(
-                                            title: AppTranslations.tr(
-                                              'analytics',
-                                            ),
-                                            count: _myPosts.isNotEmpty
-                                                ? (_myApplicants.length /
-                                                          _myPosts.length)
-                                                      .toStringAsFixed(1)
-                                                : '0.0',
+                                            title: AppTranslations.tr('analytics'),
+                                            count: _myPosts.isNotEmpty ? (_myApplicants.length / _myPosts.length).toStringAsFixed(1) : '0.0',
                                             subtitle: 'Avg Applicants/Post',
                                             bgColor: const Color(0xFF3730A3),
                                             textColor: Colors.white,
@@ -365,49 +298,37 @@ class _StartupFeedScreenState extends State<StartupFeedScreen> {
                                           label: AppTranslations.tr('post'),
                                           color: const Color(0xFF3730A3),
                                           bgColor: const Color(0xFFEEF2FF),
-                                          onTap: () => context.go(
-                                            '/startup/post-opportunity',
-                                          ),
+                                          onTap: () => context.go('/startup/post-opportunity'),
                                         ),
                                       ),
                                       const SizedBox(width: 10),
                                       Expanded(
                                         child: _buildActionButton(
                                           icon: Icons.bar_chart_rounded,
-                                          label: AppTranslations.tr(
-                                            'analytics',
-                                          ),
+                                          label: AppTranslations.tr('analytics'),
                                           color: const Color(0xFF0F4C81),
                                           bgColor: const Color(0xFFE0F2FE),
-                                          onTap: () => context.push(
-                                            '/startup/analytics',
-                                          ),
+                                          onTap: () => context.push('/startup/analytics'),
                                         ),
                                       ),
                                       const SizedBox(width: 10),
                                       Expanded(
                                         child: _buildActionButton(
                                           icon: Icons.people_outline_rounded,
-                                          label: AppTranslations.tr(
-                                            'applicants',
-                                          ),
+                                          label: AppTranslations.tr('applicants'),
                                           color: const Color(0xFF10B981),
                                           bgColor: const Color(0xFFD1FAE5),
-                                          onTap: () => context.push(
-                                            '/startup/applicants',
-                                          ),
+                                          onTap: () => context.push('/startup/applicants'),
                                         ),
                                       ),
                                       const SizedBox(width: 10),
                                       Expanded(
                                         child: _buildActionButton(
-                                          icon:
-                                              Icons.chat_bubble_outline_rounded,
+                                          icon: Icons.chat_bubble_outline_rounded,
                                           label: AppTranslations.tr('messages'),
                                           color: const Color(0xFFF59E0B),
                                           bgColor: const Color(0xFFFEF3C7),
-                                          onTap: () =>
-                                              context.push('/startup/messages'),
+                                          onTap: () => context.push('/startup/messages'),
                                         ),
                                       ),
                                     ],
@@ -416,13 +337,10 @@ class _StartupFeedScreenState extends State<StartupFeedScreen> {
 
                                   // Recent Opportunities Section
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        AppTranslations.tr(
-                                          'recent_opportunities',
-                                        ),
+                                        AppTranslations.tr('recent_opportunities'),
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
@@ -430,8 +348,7 @@ class _StartupFeedScreenState extends State<StartupFeedScreen> {
                                         ),
                                       ),
                                       TextButton(
-                                        onPressed: () =>
-                                            context.push('/startup/my-posts'),
+                                        onPressed: () => context.push('/startup/my-posts'),
                                         child: Text(
                                           AppTranslations.tr('see_all'),
                                           style: const TextStyle(
@@ -451,37 +368,20 @@ class _StartupFeedScreenState extends State<StartupFeedScreen> {
                                       decoration: BoxDecoration(
                                         color: cardBg,
                                         borderRadius: BorderRadius.circular(20),
-                                        border: Border.all(
-                                          color: isDark
-                                              ? Colors.white12
-                                              : const Color(0xFFE2E8F0),
-                                        ),
+                                        border: Border.all(color: isDark ? Colors.white12 : const Color(0xFFE2E8F0)),
                                       ),
                                       child: Column(
                                         children: [
-                                          const Icon(
-                                            Icons.post_add_rounded,
-                                            size: 48,
-                                            color: Color(0xFF9CA3AF),
-                                          ),
+                                          const Icon(Icons.post_add_rounded, size: 48, color: Color(0xFF9CA3AF)),
                                           const SizedBox(height: 12),
                                           Text(
-                                            AppTranslations.tr(
-                                              'no_opportunities_yet',
-                                            ),
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              color: textColor,
-                                            ),
+                                            AppTranslations.tr('no_opportunities_yet'),
+                                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: textColor),
                                           ),
                                           const SizedBox(height: 4),
                                           Text(
                                             AppTranslations.tr('tap_to_create'),
-                                            style: TextStyle(
-                                              fontSize: 13,
-                                              color: subtextColor,
-                                            ),
+                                            style: TextStyle(fontSize: 13, color: subtextColor),
                                             textAlign: TextAlign.center,
                                           ),
                                         ],
@@ -490,60 +390,29 @@ class _StartupFeedScreenState extends State<StartupFeedScreen> {
                                   else
                                     ListView.builder(
                                       shrinkWrap: true,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      itemCount: _myPosts.length > 3
-                                          ? 3
-                                          : _myPosts.length,
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      itemCount: _myPosts.length > 3 ? 3 : _myPosts.length,
                                       itemBuilder: (context, index) {
                                         final opp = _myPosts[index];
                                         return Container(
-                                          margin: const EdgeInsets.only(
-                                            bottom: 12,
-                                          ),
+                                          margin: const EdgeInsets.only(bottom: 12),
                                           decoration: BoxDecoration(
                                             color: cardBg,
-                                            borderRadius: BorderRadius.circular(
-                                              18,
-                                            ),
+                                            borderRadius: BorderRadius.circular(18),
                                             boxShadow: [
                                               BoxShadow(
-                                                color: Colors.black.withValues(
-                                                  alpha: 0.04,
-                                                ),
+                                                color: Colors.black.withValues(alpha: 0.04),
                                                 blurRadius: 10,
                                                 offset: const Offset(0, 3),
                                               ),
                                             ],
                                           ),
                                           child: ListTile(
-                                            onTap: () => context.push(
-                                              '/startup/post-details/${opp.id}',
-                                            ),
-                                            contentPadding:
-                                                const EdgeInsets.symmetric(
-                                                  horizontal: 16,
-                                                  vertical: 6,
-                                                ),
-                                            title: Text(
-                                              opp.title,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: textColor,
-                                              ),
-                                            ),
-                                            subtitle: Text(
-                                              '${opp.category} • ${opp.location}',
-                                              style: TextStyle(
-                                                color: subtextColor,
-                                                fontSize: 12,
-                                              ),
-                                            ),
-                                            trailing: const Icon(
-                                              Icons.arrow_forward_ios_rounded,
-                                              size: 16,
-                                              color: Color(0xFF6B7280),
-                                            ),
+                                            onTap: () => context.push('/startup/post-details/${opp.id}'),
+                                            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                                            title: Text(opp.title, style: TextStyle(fontWeight: FontWeight.bold, color: textColor)),
+                                            subtitle: Text('${opp.category} • ${opp.location}', style: TextStyle(color: subtextColor, fontSize: 12)),
+                                            trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Color(0xFF6B7280)),
                                           ),
                                         );
                                       },
@@ -558,11 +427,7 @@ class _StartupFeedScreenState extends State<StartupFeedScreen> {
               floatingActionButton: FloatingActionButton(
                 onPressed: () => context.go('/startup/post-opportunity'),
                 backgroundColor: const Color(0xFF0F4C81),
-                child: const Icon(
-                  Icons.add_rounded,
-                  color: Colors.white,
-                  size: 28,
-                ),
+                child: const Icon(Icons.add_rounded, color: Colors.white, size: 28),
               ),
               bottomNavigationBar: StartupBottomNavBar(
                 currentIndex: 0,
@@ -606,29 +471,18 @@ class _StartupFeedScreenState extends State<StartupFeedScreen> {
             children: [
               Text(
                 title,
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  color: textColor.withValues(alpha: 0.85),
-                ),
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: textColor.withValues(alpha: 0.85)),
               ),
               Icon(icon, color: textColor.withValues(alpha: 0.9), size: 20),
             ],
           ),
           Text(
             count,
-            style: TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-              color: textColor,
-            ),
+            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: textColor),
           ),
           Text(
             subtitle,
-            style: TextStyle(
-              fontSize: 11,
-              color: textColor.withValues(alpha: 0.75),
-            ),
+            style: TextStyle(fontSize: 11, color: textColor.withValues(alpha: 0.75)),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),

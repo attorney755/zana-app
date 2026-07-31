@@ -61,23 +61,14 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: Text(
-          AppTranslations.tr('logout'),
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
+        title: Text(AppTranslations.tr('logout'), style: const TextStyle(fontWeight: FontWeight.bold)),
         content: Text(AppTranslations.tr('confirm_logout')),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: Text(AppTranslations.tr('cancel')),
-          ),
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(AppTranslations.tr('cancel'))),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: Text(
-              AppTranslations.tr('logout'),
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
+            child: Text(AppTranslations.tr('logout'), style: const TextStyle(fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -101,9 +92,7 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
   void _openLanguageSelectorModal() {
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
       builder: (context) {
         final currentCode = appLanguageNotifier.value.languageCode;
 
@@ -116,14 +105,7 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    AppTranslations.tr('language'),
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF1E1B4B),
-                    ),
-                  ),
+                  Text(AppTranslations.tr('language'), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF1E1B4B))),
                   IconButton(
                     icon: const Icon(Icons.close_rounded, color: Colors.grey),
                     onPressed: () => Navigator.pop(context),
@@ -144,29 +126,19 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
                   title: Text(
                     name,
                     style: TextStyle(
-                      fontWeight: isSelected
-                          ? FontWeight.bold
-                          : FontWeight.normal,
-                      color: isSelected
-                          ? const Color(0xFF0F4C81)
-                          : const Color(0xFF1E1B4B),
+                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                      color: isSelected ? const Color(0xFF0F4C81) : const Color(0xFF1E1B4B),
                     ),
                   ),
                   trailing: isSelected
-                      ? const Icon(
-                          Icons.check_circle_rounded,
-                          color: Color(0xFF0F4C81),
-                          size: 20,
-                        )
+                      ? const Icon(Icons.check_circle_rounded, color: Color(0xFF0F4C81), size: 20)
                       : null,
                   onTap: () {
                     appLanguageNotifier.setLocale(Locale(code));
                     Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text(
-                          '${AppTranslations.tr("language")}: $name',
-                        ),
+                        content: Text('${AppTranslations.tr("language")}: $name'),
                         backgroundColor: const Color(0xFF0F4C81),
                       ),
                     );
@@ -181,12 +153,8 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
   }
 
   void _openAccountInfoModal() {
-    final fullNameController = TextEditingController(
-      text: _founder?.fullName ?? '',
-    );
-    final companyNameController = TextEditingController(
-      text: _founder?.companyName ?? '',
-    );
+    final fullNameController = TextEditingController(text: _founder?.fullName ?? '');
+    final companyNameController = TextEditingController(text: _founder?.companyName ?? '');
     final regionController = TextEditingController(text: _accountRegion);
     bool isSaving = false;
 
@@ -194,9 +162,7 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setModalState) {
@@ -215,19 +181,9 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          AppTranslations.tr('account_info'),
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF1E1B4B),
-                          ),
-                        ),
+                        Text(AppTranslations.tr('account_info'), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF1E1B4B))),
                         IconButton(
-                          icon: const Icon(
-                            Icons.close_rounded,
-                            color: Colors.grey,
-                          ),
+                          icon: const Icon(Icons.close_rounded, color: Colors.grey),
                           onPressed: () => Navigator.pop(context),
                         ),
                       ],
@@ -236,10 +192,7 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
 
                     // Account Type Readonly
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 14,
-                        vertical: 10,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                       decoration: BoxDecoration(
                         color: const Color(0xFFEEF2FF),
                         borderRadius: BorderRadius.circular(14),
@@ -247,35 +200,15 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            'Account Type',
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: Color(0xFF6B7280),
-                            ),
-                          ),
-                          Text(
-                            AppTranslations.tr('founder_partner'),
-                            style: const TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF0F4C81),
-                            ),
-                          ),
+                          const Text('Account Type', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                          Text(AppTranslations.tr('founder_partner'), style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Color(0xFF0F4C81))),
                         ],
                       ),
                     ),
                     const SizedBox(height: 16),
 
                     // Business Email Readonly
-                    Text(
-                      AppTranslations.tr('email_address'),
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey.shade700,
-                      ),
-                    ),
+                    Text(AppTranslations.tr('email_address'), style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
                     const SizedBox(height: 6),
                     TextFormField(
                       initialValue: _founder?.email ?? 'N/A',
@@ -283,27 +216,14 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: const Color(0xFFF3F4F6),
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 14,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
-                          borderSide: BorderSide.none,
-                        ),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none),
                       ),
                     ),
                     const SizedBox(height: 14),
 
                     // Full Name Editable
-                    Text(
-                      AppTranslations.tr('full_name'),
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey.shade700,
-                      ),
-                    ),
+                    Text(AppTranslations.tr('full_name'), style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
                     const SizedBox(height: 6),
                     TextFormField(
                       controller: fullNameController,
@@ -311,36 +231,15 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
                         hintText: AppTranslations.tr('full_name'),
                         filled: true,
                         fillColor: Colors.white,
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 14,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
-                          borderSide: const BorderSide(
-                            color: Color(0xFFCBD5E1),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
-                          borderSide: const BorderSide(
-                            color: Color(0xFF0F4C81),
-                            width: 1.8,
-                          ),
-                        ),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: const BorderSide(color: Color(0xFFCBD5E1))),
+                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: const BorderSide(color: Color(0xFF0F4C81), width: 1.8)),
                       ),
                     ),
                     const SizedBox(height: 14),
 
                     // Legal Business Name Editable
-                    Text(
-                      'Legal Business Name',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey.shade700,
-                      ),
-                    ),
+                    Text('Legal Business Name', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
                     const SizedBox(height: 6),
                     TextFormField(
                       controller: companyNameController,
@@ -348,36 +247,15 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
                         hintText: 'Legal Business Name',
                         filled: true,
                         fillColor: Colors.white,
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 14,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
-                          borderSide: const BorderSide(
-                            color: Color(0xFFCBD5E1),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
-                          borderSide: const BorderSide(
-                            color: Color(0xFF0F4C81),
-                            width: 1.8,
-                          ),
-                        ),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: const BorderSide(color: Color(0xFFCBD5E1))),
+                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: const BorderSide(color: Color(0xFF0F4C81), width: 1.8)),
                       ),
                     ),
                     const SizedBox(height: 14),
 
                     // Account Region Editable
-                    Text(
-                      AppTranslations.tr('country'),
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey.shade700,
-                      ),
-                    ),
+                    Text(AppTranslations.tr('country'), style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
                     const SizedBox(height: 6),
                     TextFormField(
                       controller: regionController,
@@ -385,23 +263,9 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
                         hintText: 'e.g. Rwanda / East Africa',
                         filled: true,
                         fillColor: Colors.white,
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 14,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
-                          borderSide: const BorderSide(
-                            color: Color(0xFFCBD5E1),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
-                          borderSide: const BorderSide(
-                            color: Color(0xFF0F4C81),
-                            width: 1.8,
-                          ),
-                        ),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: const BorderSide(color: Color(0xFFCBD5E1))),
+                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: const BorderSide(color: Color(0xFF0F4C81), width: 1.8)),
                       ),
                     ),
                     const SizedBox(height: 24),
@@ -413,33 +277,24 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
                         onPressed: isSaving
                             ? null
                             : () async {
-                                final uid =
-                                    FirebaseAuth.instance.currentUser?.uid;
+                                final uid = FirebaseAuth.instance.currentUser?.uid;
                                 if (uid == null) return;
 
                                 setModalState(() => isSaving = true);
                                 try {
-                                  await _firestoreService
-                                      .updateUserProfile(uid, {
-                                        'fullName': fullNameController.text
-                                            .trim(),
-                                        'companyName': companyNameController
-                                            .text
-                                            .trim(),
-                                        'country': regionController.text.trim(),
-                                      });
+                                  await _firestoreService.updateUserProfile(uid, {
+                                    'fullName': fullNameController.text.trim(),
+                                    'companyName': companyNameController.text.trim(),
+                                    'country': regionController.text.trim(),
+                                  });
 
                                   if (context.mounted) {
                                     Navigator.pop(context);
                                     _loadSettings();
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                        content: Text(
-                                          AppTranslations.tr('save_changes'),
-                                        ),
-                                        backgroundColor: const Color(
-                                          0xFF0F4C81,
-                                        ),
+                                        content: Text(AppTranslations.tr('save_changes')),
+                                        backgroundColor: const Color(0xFF0F4C81),
                                       ),
                                     );
                                   }
@@ -447,11 +302,7 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
                                   if (context.mounted) {
                                     setModalState(() => isSaving = false);
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'Error updating details: $e',
-                                        ),
-                                      ),
+                                      SnackBar(content: Text('Error updating details: $e')),
                                     );
                                   }
                                 }
@@ -460,27 +311,12 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
                           backgroundColor: const Color(0xFF0F4C81),
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                           elevation: 0,
                         ),
                         child: isSaving
-                            ? const SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  color: Colors.white,
-                                  strokeWidth: 2,
-                                ),
-                              )
-                            : Text(
-                                AppTranslations.tr('save_changes'),
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14,
-                                ),
-                              ),
+                            ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                            : Text(AppTranslations.tr('save_changes'), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                       ),
                     ),
                   ],
@@ -502,28 +338,18 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
           valueListenable: appThemeNotifier,
           builder: (context, themeMode, child) {
             final isDark = themeMode == ThemeMode.dark;
-            final bgClr = isDark
-                ? const Color(0xFF121212)
-                : const Color(0xFFF3F0FF); // Soft Lilac backdrop
+            final bgClr = isDark ? const Color(0xFF121212) : const Color(0xFFF3F0FF); // Soft Lilac backdrop
             final cardBg = isDark ? const Color(0xFF1E1E1E) : Colors.white;
             final textColor = isDark ? Colors.white : const Color(0xFF1E1B4B);
-            final subtextColor = isDark
-                ? Colors.white70
-                : const Color(0xFF6B7280);
+            final subtextColor = isDark ? Colors.white70 : const Color(0xFF6B7280);
 
             return Scaffold(
               backgroundColor: bgClr,
               appBar: AppBar(
-                backgroundColor: isDark
-                    ? const Color(0xFF1E1E1E)
-                    : Colors.white,
+                backgroundColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
                 elevation: 0,
                 leading: IconButton(
-                  icon: Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    color: isDark ? Colors.white : const Color(0xFF1E1B4B),
-                    size: 22,
-                  ),
+                  icon: Icon(Icons.arrow_back_ios_new_rounded, color: isDark ? Colors.white : const Color(0xFF1E1B4B), size: 22),
                   onPressed: () {
                     if (Navigator.canPop(context)) {
                       Navigator.pop(context);
@@ -534,33 +360,19 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
                 ),
                 title: Text(
                   AppTranslations.tr('settings_privacy'),
-                  style: TextStyle(
-                    color: isDark ? Colors.white : const Color(0xFF1E1B4B),
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(color: isDark ? Colors.white : const Color(0xFF1E1B4B), fontWeight: FontWeight.bold),
                 ),
                 centerTitle: true,
               ),
               body: _isLoading
-                  ? const Center(
-                      child: CircularProgressIndicator(
-                        color: Color(0xFF0F4C81),
-                      ),
-                    )
+                  ? const Center(child: CircularProgressIndicator(color: Color(0xFF0F4C81)))
                   : SingleChildScrollView(
                       padding: const EdgeInsets.all(20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           // Section 1: Post Management
-                          Text(
-                            AppTranslations.tr('opportunities_mgmt'),
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: textColor,
-                            ),
-                          ),
+                          Text(AppTranslations.tr('opportunities_mgmt'), style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: textColor)),
                           const SizedBox(height: 10),
                           Container(
                             decoration: BoxDecoration(
@@ -575,43 +387,17 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
                               ],
                             ),
                             child: ListTile(
-                              leading: const Icon(
-                                Icons.post_add_rounded,
-                                color: Color(0xFF0F4C81),
-                              ),
-                              title: Text(
-                                AppTranslations.tr('manage_posts'),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: textColor,
-                                ),
-                              ),
-                              subtitle: Text(
-                                AppTranslations.tr('manage_posts_sub'),
-                                style: TextStyle(
-                                  color: subtextColor,
-                                  fontSize: 12,
-                                ),
-                              ),
-                              trailing: Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                size: 16,
-                                color: subtextColor,
-                              ),
+                              leading: const Icon(Icons.post_add_rounded, color: Color(0xFF0F4C81)),
+                              title: Text(AppTranslations.tr('manage_posts'), style: TextStyle(fontWeight: FontWeight.bold, color: textColor)),
+                              subtitle: Text(AppTranslations.tr('manage_posts_sub'), style: TextStyle(color: subtextColor, fontSize: 12)),
+                              trailing: Icon(Icons.arrow_forward_ios_rounded, size: 16, color: subtextColor),
                               onTap: () => context.push('/startup/my-posts'),
                             ),
                           ),
                           const SizedBox(height: 24),
 
                           // Section 2: Account & Business Verification
-                          Text(
-                            AppTranslations.tr('account_verification'),
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: textColor,
-                            ),
-                          ),
+                          Text(AppTranslations.tr('account_verification'), style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: textColor)),
                           const SizedBox(height: 10),
                           Container(
                             padding: const EdgeInsets.symmetric(vertical: 8),
@@ -629,84 +415,26 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
                             child: Column(
                               children: [
                                 ListTile(
-                                  leading: const Icon(
-                                    Icons.account_box_outlined,
-                                    color: Color(0xFF0F4C81),
-                                  ),
-                                  title: Text(
-                                    AppTranslations.tr('account_info'),
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: textColor,
-                                    ),
-                                  ),
-                                  subtitle: Text(
-                                    AppTranslations.tr('account_info_sub'),
-                                    style: TextStyle(
-                                      color: subtextColor,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  trailing: Icon(
-                                    Icons.arrow_forward_ios_rounded,
-                                    size: 16,
-                                    color: subtextColor,
-                                  ),
+                                  leading: const Icon(Icons.account_box_outlined, color: Color(0xFF0F4C81)),
+                                  title: Text(AppTranslations.tr('account_info'), style: TextStyle(fontWeight: FontWeight.bold, color: textColor)),
+                                  subtitle: Text(AppTranslations.tr('account_info_sub'), style: TextStyle(color: subtextColor, fontSize: 12)),
+                                  trailing: Icon(Icons.arrow_forward_ios_rounded, size: 16, color: subtextColor),
                                   onTap: _openAccountInfoModal,
                                 ),
                                 const SizedBox(height: 4),
                                 ListTile(
-                                  leading: const Icon(
-                                    Icons.lock_outline_rounded,
-                                    color: Color(0xFF0F4C81),
-                                  ),
-                                  title: Text(
-                                    AppTranslations.tr('security_password'),
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: textColor,
-                                    ),
-                                  ),
-                                  subtitle: Text(
-                                    AppTranslations.tr('security_password_sub'),
-                                    style: TextStyle(
-                                      color: subtextColor,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  trailing: Icon(
-                                    Icons.arrow_forward_ios_rounded,
-                                    size: 16,
-                                    color: subtextColor,
-                                  ),
+                                  leading: const Icon(Icons.lock_outline_rounded, color: Color(0xFF0F4C81)),
+                                  title: Text(AppTranslations.tr('security_password'), style: TextStyle(fontWeight: FontWeight.bold, color: textColor)),
+                                  subtitle: Text(AppTranslations.tr('security_password_sub'), style: TextStyle(color: subtextColor, fontSize: 12)),
+                                  trailing: Icon(Icons.arrow_forward_ios_rounded, size: 16, color: subtextColor),
                                   onTap: _openChangePasswordDialog,
                                 ),
                                 const SizedBox(height: 4),
                                 ListTile(
-                                  leading: const Icon(
-                                    Icons.verified_user_outlined,
-                                    color: Color(0xFF10B981),
-                                  ),
-                                  title: Text(
-                                    AppTranslations.tr('business_verification'),
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: textColor,
-                                    ),
-                                  ),
-                                  subtitle: Text(
-                                    AppTranslations.tr('verified_account'),
-                                    style: const TextStyle(
-                                      color: Color(0xFF10B981),
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  trailing: const Icon(
-                                    Icons.check_circle_rounded,
-                                    color: Color(0xFF10B981),
-                                    size: 20,
-                                  ),
+                                  leading: const Icon(Icons.verified_user_outlined, color: Color(0xFF10B981)),
+                                  title: Text(AppTranslations.tr('business_verification'), style: TextStyle(fontWeight: FontWeight.bold, color: textColor)),
+                                  subtitle: Text(AppTranslations.tr('verified_account'), style: const TextStyle(color: Color(0xFF10B981), fontSize: 12, fontWeight: FontWeight.bold)),
+                                  trailing: const Icon(Icons.check_circle_rounded, color: Color(0xFF10B981), size: 20),
                                 ),
                               ],
                             ),
@@ -714,14 +442,7 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
                           const SizedBox(height: 24),
 
                           // Section 3: Appearance & Preferences
-                          Text(
-                            AppTranslations.tr('preferences'),
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: textColor,
-                            ),
-                          ),
+                          Text(AppTranslations.tr('preferences'), style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: textColor)),
                           const SizedBox(height: 10),
                           Container(
                             padding: const EdgeInsets.symmetric(vertical: 8),
@@ -739,54 +460,17 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
                             child: Column(
                               children: [
                                 ListTile(
-                                  leading: const Icon(
-                                    Icons.language_rounded,
-                                    color: Color(0xFF0F4C81),
-                                  ),
-                                  title: Text(
-                                    AppTranslations.tr('language'),
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: textColor,
-                                    ),
-                                  ),
-                                  subtitle: Text(
-                                    _languageMap[locale.languageCode] ??
-                                        'English (US)',
-                                    style: TextStyle(
-                                      color: subtextColor,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  trailing: Icon(
-                                    Icons.arrow_forward_ios_rounded,
-                                    size: 16,
-                                    color: subtextColor,
-                                  ),
+                                  leading: const Icon(Icons.language_rounded, color: Color(0xFF0F4C81)),
+                                  title: Text(AppTranslations.tr('language'), style: TextStyle(fontWeight: FontWeight.bold, color: textColor)),
+                                  subtitle: Text(_languageMap[locale.languageCode] ?? 'English (US)', style: TextStyle(color: subtextColor, fontSize: 12)),
+                                  trailing: Icon(Icons.arrow_forward_ios_rounded, size: 16, color: subtextColor),
                                   onTap: _openLanguageSelectorModal,
                                 ),
                                 const SizedBox(height: 4),
                                 SwitchListTile(
-                                  secondary: const Icon(
-                                    Icons.dark_mode_outlined,
-                                    color: Color(0xFF0F4C81),
-                                  ),
-                                  title: Text(
-                                    isDark
-                                        ? AppTranslations.tr('dark_mode')
-                                        : AppTranslations.tr('light_mode'),
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: textColor,
-                                    ),
-                                  ),
-                                  subtitle: Text(
-                                    AppTranslations.tr('dark_mode_sub'),
-                                    style: TextStyle(
-                                      color: subtextColor,
-                                      fontSize: 12,
-                                    ),
-                                  ),
+                                  secondary: const Icon(Icons.dark_mode_outlined, color: Color(0xFF0F4C81)),
+                                  title: Text(isDark ? AppTranslations.tr('dark_mode') : AppTranslations.tr('light_mode'), style: TextStyle(fontWeight: FontWeight.bold, color: textColor)),
+                                  subtitle: Text(AppTranslations.tr('dark_mode_sub'), style: TextStyle(color: subtextColor, fontSize: 12)),
                                   value: isDark,
                                   onChanged: (val) {
                                     appThemeNotifier.toggleTheme();
@@ -811,24 +495,9 @@ class _StartupSettingsScreenState extends State<StartupSettingsScreen> {
                               ],
                             ),
                             child: ListTile(
-                              leading: const Icon(
-                                Icons.logout_rounded,
-                                color: Colors.red,
-                              ),
-                              title: Text(
-                                AppTranslations.tr('logout'),
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.red,
-                                ),
-                              ),
-                              subtitle: Text(
-                                AppTranslations.tr('logout_sub'),
-                                style: TextStyle(
-                                  color: subtextColor,
-                                  fontSize: 12,
-                                ),
-                              ),
+                              leading: const Icon(Icons.logout_rounded, color: Colors.red),
+                              title: Text(AppTranslations.tr('logout'), style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
+                              subtitle: Text(AppTranslations.tr('logout_sub'), style: TextStyle(color: subtextColor, fontSize: 12)),
                               onTap: _handleLogout,
                             ),
                           ),

@@ -40,16 +40,8 @@ class _FounderMessagesScreenState extends State<FounderMessagesScreen> {
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Text(
-          'Delete Message',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF1E1B4B),
-          ),
-        ),
-        content: const Text(
-          'Are you sure you want to delete this feedback message from your history?',
-        ),
+        title: const Text('Delete Message', style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF1E1B4B))),
+        content: const Text('Are you sure you want to delete this feedback message from your history?'),
         actions: [
           Row(
             children: [
@@ -58,18 +50,10 @@ class _FounderMessagesScreenState extends State<FounderMessagesScreen> {
                   onPressed: () => Navigator.pop(context, false),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     side: const BorderSide(color: Color(0xFF9CA3AF)),
                   ),
-                  child: const Text(
-                    'Cancel',
-                    style: TextStyle(
-                      color: Color(0xFF4B5563),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  child: const Text('Cancel', style: TextStyle(color: Color(0xFF4B5563), fontWeight: FontWeight.bold)),
                 ),
               ),
               const SizedBox(width: 12),
@@ -80,15 +64,10 @@ class _FounderMessagesScreenState extends State<FounderMessagesScreen> {
                     backgroundColor: const Color(0xFFEF4444),
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     elevation: 0,
                   ),
-                  child: const Text(
-                    'Delete',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
+                  child: const Text('Delete', style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
               ),
             ],
@@ -140,19 +119,12 @@ class _FounderMessagesScreenState extends State<FounderMessagesScreen> {
                   Expanded(
                     child: Text(
                       'Send Follow-Up / Reminder to ${msg.studentName}',
-                      style: const TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF1E1B4B),
-                      ),
+                      style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Color(0xFF1E1B4B)),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(
-                      Icons.close_rounded,
-                      color: Color(0xFF6B7280),
-                    ),
+                    icon: const Icon(Icons.close_rounded, color: Color(0xFF6B7280)),
                     onPressed: () => Navigator.pop(context),
                   ),
                 ],
@@ -160,11 +132,7 @@ class _FounderMessagesScreenState extends State<FounderMessagesScreen> {
               const SizedBox(height: 4),
               Text(
                 'For opportunity: ${msg.opportunityTitle}',
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Color(0xFF6B7280),
-                  fontWeight: FontWeight.w500,
-                ),
+                style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280), fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: 14),
 
@@ -174,41 +142,20 @@ class _FounderMessagesScreenState extends State<FounderMessagesScreen> {
                 runSpacing: 8,
                 children: [
                   ActionChip(
-                    avatar: const Icon(
-                      Icons.description_outlined,
-                      size: 14,
-                      color: Color(0xFF0F4C81),
-                    ),
-                    label: const Text(
-                      'Document Reminder',
-                      style: TextStyle(fontSize: 12),
-                    ),
+                    avatar: const Icon(Icons.description_outlined, size: 14, color: Color(0xFF0F4C81)),
+                    label: const Text('Document Reminder', style: TextStyle(fontSize: 12)),
                     onPressed: () => feedbackController.text =
                         'Reminder: Please submit the requested documents/resume before the deadline so we can finalize your review.',
                   ),
                   ActionChip(
-                    avatar: const Icon(
-                      Icons.replay_rounded,
-                      size: 14,
-                      color: Color(0xFF0F4C81),
-                    ),
-                    label: const Text(
-                      'Application Reconsidered',
-                      style: TextStyle(fontSize: 12),
-                    ),
+                    avatar: const Icon(Icons.replay_rounded, size: 14, color: Color(0xFF0F4C81)),
+                    label: const Text('Application Reconsidered', style: TextStyle(fontSize: 12)),
                     onPressed: () => feedbackController.text =
                         'Good news! We have reconsidered your application and would love to move forward. Please check your inbox for details.',
                   ),
                   ActionChip(
-                    avatar: const Icon(
-                      Icons.calendar_month_outlined,
-                      size: 14,
-                      color: Color(0xFF0F4C81),
-                    ),
-                    label: const Text(
-                      'Interview Slot Reminder',
-                      style: TextStyle(fontSize: 12),
-                    ),
+                    avatar: const Icon(Icons.calendar_month_outlined, size: 14, color: Color(0xFF0F4C81)),
+                    label: const Text('Interview Slot Reminder', style: TextStyle(fontSize: 12)),
                     onPressed: () => feedbackController.text =
                         'Friendly reminder regarding your scheduled interview slot. Let us know if you need to reschedule.',
                   ),
@@ -229,10 +176,7 @@ class _FounderMessagesScreenState extends State<FounderMessagesScreen> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
-                    borderSide: const BorderSide(
-                      color: Color(0xFF0F4C81),
-                      width: 2,
-                    ),
+                    borderSide: const BorderSide(color: Color(0xFF0F4C81), width: 2),
                   ),
                 ),
               ),
@@ -258,9 +202,7 @@ class _FounderMessagesScreenState extends State<FounderMessagesScreen> {
                     if (mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(
-                            'Follow-up message sent successfully to ${msg.studentName}!',
-                          ),
+                          content: Text('Follow-up message sent successfully to ${msg.studentName}!'),
                           backgroundColor: const Color(0xFF10B981),
                         ),
                       );
@@ -268,17 +210,12 @@ class _FounderMessagesScreenState extends State<FounderMessagesScreen> {
                     }
                   },
                   icon: const Icon(Icons.send_rounded, size: 18),
-                  label: const Text(
-                    'Send Follow-Up Message',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                  ),
+                  label: const Text('Send Follow-Up Message', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF0F4C81),
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                   ),
                 ),
               ),
@@ -303,11 +240,7 @@ class _FounderMessagesScreenState extends State<FounderMessagesScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios_new_rounded,
-            color: textColor,
-            size: 22,
-          ),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: textColor, size: 22),
           onPressed: () {
             if (Navigator.canPop(context)) {
               Navigator.pop(context);
@@ -326,9 +259,7 @@ class _FounderMessagesScreenState extends State<FounderMessagesScreen> {
         stream: _firestoreService.streamFounderMessages(currentUid),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(color: Color(0xFF0F4C81)),
-            );
+            return const Center(child: CircularProgressIndicator(color: Color(0xFF0F4C81)));
           }
 
           final messages = snapshot.data ?? [];
@@ -338,25 +269,11 @@ class _FounderMessagesScreenState extends State<FounderMessagesScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
-                    Icons.chat_bubble_outline_rounded,
-                    size: 64,
-                    color: Color(0xFF9CA3AF),
-                  ),
+                  const Icon(Icons.chat_bubble_outline_rounded, size: 64, color: Color(0xFF9CA3AF)),
                   const SizedBox(height: 16),
-                  const Text(
-                    'No messages sent yet',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: textColor,
-                    ),
-                  ),
+                  const Text('No messages sent yet', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: textColor)),
                   const SizedBox(height: 8),
-                  const Text(
-                    'Feedback sent to candidates will appear here.',
-                    style: TextStyle(fontSize: 14, color: subtextColor),
-                  ),
+                  const Text('Feedback sent to candidates will appear here.', style: TextStyle(fontSize: 14, color: subtextColor)),
                 ],
               ),
             );
@@ -372,9 +289,7 @@ class _FounderMessagesScreenState extends State<FounderMessagesScreen> {
               return Card(
                 color: Colors.white,
                 elevation: 2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                 margin: const EdgeInsets.only(bottom: 14),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(16),
@@ -394,36 +309,23 @@ class _FounderMessagesScreenState extends State<FounderMessagesScreen> {
                                     radius: 18,
                                     backgroundColor: const Color(0xFFEEF2FF),
                                     child: Text(
-                                      msg.studentName.isNotEmpty
-                                          ? msg.studentName[0].toUpperCase()
-                                          : 'S',
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xFF0F4C81),
-                                      ),
+                                      msg.studentName.isNotEmpty ? msg.studentName[0].toUpperCase() : 'S',
+                                      style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF0F4C81)),
                                     ),
                                   ),
                                   const SizedBox(width: 10),
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           msg.studentName,
-                                          style: const TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,
-                                            color: textColor,
-                                          ),
+                                          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: textColor),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                         Text(
                                           'For: ${msg.opportunityTitle}',
-                                          style: const TextStyle(
-                                            fontSize: 12,
-                                            color: subtextColor,
-                                          ),
+                                          style: const TextStyle(fontSize: 12, color: subtextColor),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ],
@@ -437,33 +339,21 @@ class _FounderMessagesScreenState extends State<FounderMessagesScreen> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                   decoration: BoxDecoration(
                                     color: const Color(0xFFEEF2FF),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: Text(
                                     timeAgo,
-                                    style: const TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xFF0F4C81),
-                                    ),
+                                    style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF0F4C81)),
                                   ),
                                 ),
                                 const SizedBox(width: 4),
                                 IconButton(
-                                  icon: const Icon(
-                                    Icons.delete_outline_rounded,
-                                    size: 20,
-                                    color: Color(0xFFEF4444),
-                                  ),
+                                  icon: const Icon(Icons.delete_outline_rounded, size: 20, color: Color(0xFFEF4444)),
                                   tooltip: 'Delete Message',
-                                  onPressed: () =>
-                                      _confirmDeleteMessage(msg.id),
+                                  onPressed: () => _confirmDeleteMessage(msg.id),
                                 ),
                               ],
                             ),
@@ -474,11 +364,7 @@ class _FounderMessagesScreenState extends State<FounderMessagesScreen> {
                         const SizedBox(height: 8),
                         Text(
                           msg.messageText,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: textColor,
-                            height: 1.4,
-                          ),
+                          style: const TextStyle(fontSize: 14, color: textColor, height: 1.4),
                         ),
                         const SizedBox(height: 12),
 
@@ -487,19 +373,8 @@ class _FounderMessagesScreenState extends State<FounderMessagesScreen> {
                           alignment: Alignment.centerRight,
                           child: TextButton.icon(
                             onPressed: () => _showSendFollowUpDialog(msg),
-                            icon: const Icon(
-                              Icons.reply_rounded,
-                              size: 16,
-                              color: Color(0xFF0F4C81),
-                            ),
-                            label: const Text(
-                              'Send Follow-up / Reminder',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF0F4C81),
-                              ),
-                            ),
+                            icon: const Icon(Icons.reply_rounded, size: 16, color: Color(0xFF0F4C81)),
+                            label: const Text('Send Follow-up / Reminder', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF0F4C81))),
                           ),
                         ),
                       ],

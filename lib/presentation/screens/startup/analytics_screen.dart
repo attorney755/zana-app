@@ -50,9 +50,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
       valueListenable: appThemeNotifier,
       builder: (context, themeMode, child) {
         final isDark = themeMode == ThemeMode.dark;
-        final bgClr = isDark
-            ? const Color(0xFF121212)
-            : const Color(0xFFF3F0FF); // Soft Lilac backdrop
+        final bgClr = isDark ? const Color(0xFF121212) : const Color(0xFFF3F0FF); // Soft Lilac backdrop
         final cardBg = isDark ? const Color(0xFF1E1E1E) : Colors.white;
         final textColor = isDark ? Colors.white : const Color(0xFF1E1B4B);
         final subtextColor = isDark ? Colors.white70 : const Color(0xFF6B7280);
@@ -69,11 +67,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
             backgroundColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
             elevation: 0,
             leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: isDark ? Colors.white : const Color(0xFF1E1B4B),
-                size: 22,
-              ),
+              icon: Icon(Icons.arrow_back_ios_new_rounded, color: isDark ? Colors.white : const Color(0xFF1E1B4B), size: 22),
               onPressed: () {
                 if (Navigator.canPop(context)) {
                   Navigator.pop(context);
@@ -84,17 +78,12 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
             ),
             title: Text(
               'Performance Analytics',
-              style: TextStyle(
-                color: isDark ? Colors.white : const Color(0xFF1E1B4B),
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(color: isDark ? Colors.white : const Color(0xFF1E1B4B), fontWeight: FontWeight.bold),
             ),
             centerTitle: true,
           ),
           body: _isLoading
-              ? const Center(
-                  child: CircularProgressIndicator(color: Color(0xFF3730A3)),
-                )
+              ? const Center(child: CircularProgressIndicator(color: Color(0xFF3730A3)))
               : SingleChildScrollView(
                   padding: const EdgeInsets.all(20),
                   child: Column(
@@ -102,11 +91,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                     children: [
                       Text(
                         'Key Performance Metrics',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: textColor,
-                        ),
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: textColor),
                       ),
                       const SizedBox(height: 14),
 
@@ -114,30 +99,15 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                       Row(
                         children: [
                           Expanded(
-                            child: _buildMetricBox(
-                              'Total Posts',
-                              '$totalPosts',
-                              Icons.post_add_rounded,
-                              const Color(0xFF0F4C81),
-                            ),
+                            child: _buildMetricBox('Total Posts', '$totalPosts', Icons.post_add_rounded, const Color(0xFF0F4C81)),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
-                            child: _buildMetricBox(
-                              'Applicants',
-                              '$totalApplicants',
-                              Icons.people_rounded,
-                              const Color(0xFF7F1D1D),
-                            ),
+                            child: _buildMetricBox('Applicants', '$totalApplicants', Icons.people_rounded, const Color(0xFF7F1D1D)),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
-                            child: _buildMetricBox(
-                              'Avg / Post',
-                              conversionRate,
-                              Icons.trending_up_rounded,
-                              const Color(0xFF3730A3),
-                            ),
+                            child: _buildMetricBox('Avg / Post', conversionRate, Icons.trending_up_rounded, const Color(0xFF3730A3)),
                           ),
                         ],
                       ),
@@ -146,11 +116,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                       // "Your Opportunities" Performance Section with Left Color Accent Stripes!
                       Text(
                         'Your Opportunities',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: textColor,
-                        ),
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: textColor),
                       ),
                       const SizedBox(height: 12),
 
@@ -165,10 +131,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                           child: Center(
                             child: Text(
                               'No opportunities posted to analyze yet.',
-                              style: TextStyle(
-                                color: subtextColor,
-                                fontSize: 14,
-                              ),
+                              style: TextStyle(color: subtextColor, fontSize: 14),
                             ),
                           ),
                         )
@@ -181,9 +144,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                             final opp = _posts[index];
                             final stripeColor = index % 3 == 0
                                 ? const Color(0xFF0F4C81)
-                                : (index % 3 == 1
-                                      ? const Color(0xFF7F1D1D)
-                                      : const Color(0xFF10B981));
+                                : (index % 3 == 1 ? const Color(0xFF7F1D1D) : const Color(0xFF10B981));
 
                             return Container(
                               margin: const EdgeInsets.only(bottom: 12),
@@ -199,9 +160,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                                 ],
                               ),
                               child: InkWell(
-                                onTap: () => context.push(
-                                  '/startup/post-details?id=${opp.id}',
-                                ),
+                                onTap: () => context.push('/startup/post-details?id=${opp.id}'),
                                 borderRadius: BorderRadius.circular(16),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(16),
@@ -216,55 +175,36 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                                       const SizedBox(width: 14),
                                       Expanded(
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               opp.title,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16,
-                                                color: textColor,
-                                              ),
+                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: textColor),
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                             ),
                                             const SizedBox(height: 4),
                                             Text(
                                               '${opp.category} • ${opp.commitment}',
-                                              style: TextStyle(
-                                                color: subtextColor,
-                                                fontSize: 12,
-                                              ),
+                                              style: TextStyle(color: subtextColor, fontSize: 12),
                                             ),
                                           ],
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.only(
-                                          right: 16,
-                                        ),
+                                        padding: const EdgeInsets.only(right: 16),
                                         child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.end,
                                           children: [
                                             Text(
                                               '${opp.applicantsCount} Applicants',
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 13,
-                                                color: Color(0xFF3730A3),
-                                              ),
+                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Color(0xFF3730A3)),
                                             ),
                                             const SizedBox(height: 4),
                                             Text(
                                               '${opp.viewsCount} Views',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                color: subtextColor,
-                                              ),
+                                              style: TextStyle(fontSize: 12, color: subtextColor),
                                             ),
                                           ],
                                         ),
@@ -284,12 +224,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
     );
   }
 
-  Widget _buildMetricBox(
-    String title,
-    String value,
-    IconData icon,
-    Color bgColor,
-  ) {
+  Widget _buildMetricBox(String title, String value, IconData icon, Color bgColor) {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
@@ -308,23 +243,9 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
         children: [
           Icon(icon, color: Colors.white, size: 22),
           const SizedBox(height: 10),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
+          Text(value, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
           const SizedBox(height: 4),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 11,
-              fontWeight: FontWeight.w600,
-              color: Colors.white70,
-            ),
-          ),
+          Text(title, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white70)),
         ],
       ),
     );
